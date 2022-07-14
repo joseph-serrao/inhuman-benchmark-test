@@ -5,28 +5,33 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 import pdb
+import chromedriver_autoinstaller
+
+chromedriver_autoinstaller.install()
 
 link = "https://humanbenchmark.com/tests/sequence"
 
-driver = webdriver.Firefox()
+driver = webdriver.Chrome()
 driver.get(link)
 
 start_button = None
 
 try:
-	start_button = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.XPATH, "//button[@class='css-de05nr e19owgy710' and contains(text(), 'Start')]"))
+    start_button = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located(
+            (By.XPATH, "//button[@class='css-de05nr e19owgy710' and contains(text(), 'Start')]"))
     )
 finally:
-	start_button.click()
+    start_button.click()
 
 squares = []
 squares_class = []
 a = 'square active'
 
-for i in range(1,4):
-	for j in range(1,4):
-		squares.append(driver.find_element(By.XPATH, f"//div[@class='squares']/div[{i}]/div[{j}]"))
+for i in range(1, 4):
+    for j in range(1, 4):
+        squares.append(driver.find_element(
+            By.XPATH, f"//div[@class='squares']/div[{i}]/div[{j}]"))
 
 
 sequence = {}
@@ -37,34 +42,31 @@ end_time = 0.3
 wait_complete = False
 
 while True:
-	level_no = int(level.text)
+    level_no = int(level.text)
 
-	if level_no > count:
+    if level_no > count:
 
-		count += 1
-		end_time = (0.55 * level_no) + 0.1
+        count += 1
+        end_time = (0.55 * level_no) + 0.1
 
-	squares_class = [elem.get_attribute("class") for elem in squares]
+    squares_class = [elem.get_attribute("class") for elem in squares]
 
-	if a in squares_class:
-		sequence[level_no] = squares_class.index(a)
+    if a in squares_class:
+        sequence[level_no] = squares_class.index(a)
 
-	if len(sequence.values()) == level_no and not wait_complete:
-		start_time = time.time()
-		wait_complete = True
+    if len(sequence.values()) == level_no and not wait_complete:
+        start_time = time.time()
+        wait_complete = True
 
-	print(sequence)
-	print(time.time() - start_time)
+    print(sequence)
+    print(time.time() - start_time)
 
-	if (time.time() - start_time) > end_time:
-		#pdb.set_trace()
-		print("time to click")
-		for i in sequence.values():
-			squares[i].click()
+    if (time.time() - start_time) > end_time:
+        # pdb.set_trace()
+        print("time to click")
+        for i in sequence.values():
+            squares[i].click()
 
-		wait_complete = False
+        wait_complete = False
 
-		start_time = float('inf')
-
-
-
+        start_time = float('inf')

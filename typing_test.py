@@ -4,10 +4,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
+import chromedriver_autoinstaller
+
+chromedriver_autoinstaller.install()
 
 
 link = 'https://humanbenchmark.com/tests/typing'
-driver = webdriver.Firefox()
+driver = webdriver.Chrome()
 driver.get(link)
 
 char_elem = None
@@ -16,7 +19,8 @@ char = ''
 # explicit wait until the word element exists
 try:
     char_elem = WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, ".incomplete.current"))
+        EC.presence_of_element_located(
+            (By.CSS_SELECTOR, ".incomplete.current"))
     )
 finally:
     char = char_elem.text
