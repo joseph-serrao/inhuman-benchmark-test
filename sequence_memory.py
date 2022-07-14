@@ -4,7 +4,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
-import pdb
 import chromedriver_autoinstaller
 
 chromedriver_autoinstaller.install()
@@ -35,13 +34,16 @@ for i in range(1, 4):
 
 
 sequence = {}
+
 level = driver.find_element(By.XPATH, "//span[@class='css-dd6wi1']/span[2]")
+level_no = 0
 count = 1
+
 start_time = float('inf')
 end_time = 0.3
 wait_complete = False
 
-while True:
+while level_no <= 40:
     level_no = int(level.text)
 
     if level_no > count:
@@ -62,7 +64,6 @@ while True:
     print(time.time() - start_time)
 
     if (time.time() - start_time) > end_time:
-        # pdb.set_trace()
         print("time to click")
         for i in sequence.values():
             squares[i].click()
