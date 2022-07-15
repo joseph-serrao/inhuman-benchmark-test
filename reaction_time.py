@@ -13,6 +13,14 @@ link = 'https://humanbenchmark.com/tests/reactiontime'
 driver = webdriver.Chrome()
 driver.get(link)
 
+try:
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((
+            By.XPATH, "//div[@class='css-1gr1qbh']/div[4]/div[1]"))
+    )
+finally:
+    pass
+
 element = driver.find_element(
     By.XPATH, "//div[@class='css-1gr1qbh']/div[4]/div[1]")
 element.click()

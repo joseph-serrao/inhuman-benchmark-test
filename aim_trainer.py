@@ -13,10 +13,16 @@ link = 'https://humanbenchmark.com/tests/aim'
 driver = webdriver.Chrome()
 driver.get(link)
 
+try:
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CLASS_NAME, "css-ad1j3y"))
+    )
+finally:
+    pass
+
 while True:
     try:
         target_button = driver.find_element(By.CLASS_NAME, "css-ad1j3y")
-        webdriver.ActionChains(driver).move_to_element(
-            target_button).click().perform()
+        webdriver.ActionChains(driver).click(target_button).perform()
     except NoSuchElementException:
         break
