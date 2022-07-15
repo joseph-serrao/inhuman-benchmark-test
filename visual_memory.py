@@ -47,13 +47,13 @@ level_no = 0
 count = 0
 
 start_time = float('inf')
-end_time = 2.5
+end_time = 3.25
 wait_complete = False
 
 grid_increased_count = 1
 level_to_increase = 3
 
-while level_no <= 40:
+while True:
     level_no = int(level.text)
 
     if level_no > count:
