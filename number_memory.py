@@ -5,12 +5,16 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 import chromedriver_autoinstaller
+from selenium.webdriver.chrome.options import Options
+
+chrome_options = Options()
+chrome_options.add_experimental_option("detach", True)
 
 chromedriver_autoinstaller.install()
 
 link = "https://humanbenchmark.com/tests/number-memory"
 
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(options=chrome_options)
 driver.get(link)
 
 start_button = None
