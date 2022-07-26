@@ -7,42 +7,42 @@ from selenium.common.exceptions import NoSuchElementException
 import chromedriver_autoinstaller
 from selenium.webdriver.chrome.options import Options
 
+# Prevents the window from closing automaticallly after program is complete
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
 
 chromedriver_autoinstaller.install()
 
-
+# Opening the page
 link = 'https://humanbenchmark.com/tests/typing'
 driver = webdriver.Chrome(options=chrome_options)
 driver.get(link)
 
-char_elem = None
-char = ''
+char_element = None
+char_string = ''
 
-# explicit wait until the word element exists
-try:
-    char_elem = WebDriverWait(driver, 5).until(
-        EC.presence_of_element_located(
-            (By.CSS_SELECTOR, ".incomplete.current"))
-    )
-finally:
-    char = char_elem.text
+# Explicit wait until the highlighted character element exists
+char_element = WebDriverWait(driver, 5).until(
+    EC.presence_of_element_located(
+        (By.CSS_SELECTOR, ".incomplete.current"))
+)
+
+char_string = char_element.text
 
 input_elem = driver.find_element(By.CSS_SELECTOR, ".letters.notranslate")
 
-# typing the words
+# Typing the characters
 while True:
-    if char.strip() == '':
+    if char_string.strip() == '':
+        # The space read from the HTML code does not correspond to selenium spaces
         input_elem.send_keys(Keys.SPACE)
     else:
-        input_elem.send_keys(char)
+        input_elem.send_keys(char_string)
 
-    # end condition
-    # break if the last word has been typed (i.e. highlighted word does not exist)
+    # End condition
+    # Break if the last character has been typed (i.e. highlighted character does not exist)
     try:
-        char = driver.find_element(By.CSS_SELECTOR, ".incomplete.current").text
-
+        char_string = driver.find_element(
+            By.CSS_SELECTOR, ".incomplete.current").text
     except NoSuchElementException:
-        print("reached end of text")
         break

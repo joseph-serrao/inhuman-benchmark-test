@@ -7,36 +7,39 @@ import time
 import chromedriver_autoinstaller
 from selenium.webdriver.chrome.options import Options
 
+# Prevents the window from closing automaticallly after program is complete
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
 
 chromedriver_autoinstaller.install()
 
+# Opening the page
 link = "https://humanbenchmark.com/tests/sequence"
-
 driver = webdriver.Chrome(options=chrome_options)
 driver.get(link)
 
 start_button = None
 
-try:
-    start_button = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located(
-            (By.XPATH, "//button[@class='css-de05nr e19owgy710' and contains(text(), 'Start')]"))
-    )
-finally:
-    start_button.click()
+# Explicit wait until the start button exists
+start_button = WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located(
+        (By.XPATH, "//button[@class='css-de05nr e19owgy710' and contains(text(), 'Start')]"))
+)
+
+start_button.click()
 
 squares = []
 squares_class = []
-a = 'square active'
+active = 'square active'
 
+# Getting and storing the div element objects inside squares
 for i in range(1, 4):
     for j in range(1, 4):
         squares.append(driver.find_element(
             By.XPATH, f"//div[@class='squares']/div[{i}]/div[{j}]"))
 
 
+# Dictionary is used to avoid duplication of the same square
 sequence = {}
 
 level = driver.find_element(By.XPATH, "//span[@class='css-dd6wi1']/span[2]")
@@ -45,33 +48,34 @@ count = 1
 
 start_time = float('inf')
 end_time = 0.3
-wait_complete = False
+waiting = False
 
-while level_no <= 40:
+while level_no < 40:
     level_no = int(level.text)
 
+    # If the level has increased, increment the time it takes to wait for all the squares' animation
     if level_no > count:
-
         count += 1
         end_time = (0.55 * level_no) + 0.1
 
+    # Get the class names from the list of square elements
     squares_class = [elem.get_attribute("class") for elem in squares]
 
-    if a in squares_class:
-        sequence[level_no] = squares_class.index(a)
+    # check for the squares whose animation has started
+    if active in squares_class:
+        sequence[level_no] = squares_class.index(active)
 
-    if len(sequence.values()) == level_no and not wait_complete:
+    # Start waiting for all the squares to light up as soon as the first square lights up
+    # len(sequence.values()) == level_no) is always true when the first square lights up
+    if len(sequence.values()) == level_no and not waiting:
         start_time = time.time()
-        wait_complete = True
+        waiting = True
 
-    print(sequence)
-    print(time.time() - start_time)
-
+    # If the waiting time is complete, start clicking the squares
     if (time.time() - start_time) > end_time:
-        print("time to click")
         for i in sequence.values():
             squares[i].click()
 
-        wait_complete = False
+        waiting = False
 
         start_time = float('inf')
