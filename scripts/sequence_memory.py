@@ -8,7 +8,7 @@ import chromedriver_autoinstaller
 from selenium.webdriver.chrome.options import Options
 
 
-def main(drivers):
+def main(driver):
 
     # Explicit wait until the start button exists
     start_button = WebDriverWait(driver, 10).until(
