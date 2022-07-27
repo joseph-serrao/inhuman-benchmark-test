@@ -94,8 +94,11 @@ def main(driver):
         # If the wait time is complete, start clicking the squares
         if (time.time() - start_time) > end_time:
 
-            for i in sequence.values():
-                squares[i].click()
+            try:
+                for i in sequence.values():
+                    squares[i].click()
+            except:
+                break
 
             waiting = False
 
