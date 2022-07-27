@@ -1,3 +1,4 @@
+from optparse import Values
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -50,7 +51,9 @@ start_time = float('inf')
 end_time = 0.3
 waiting = False
 
-while level_no < 40:
+game_level_limit = 35
+
+while level_no < (game_level_limit + 1):
     level_no = int(level.text)
 
     # If the level has increased, increment the time it takes to wait for all the squares' animation
@@ -65,16 +68,20 @@ while level_no < 40:
     if active in squares_class:
         sequence[level_no] = squares_class.index(active)
 
-    # Start waiting for all the squares to light up as soon as the first square lights up
-    # len(sequence.values()) == level_no) is always true when the first square lights up
+    # Start waiting for all the squares to light up
+    # The first if condition is always true when the first square lights up
     if len(sequence.values()) == level_no and not waiting:
         start_time = time.time()
         waiting = True
 
     # If the waiting time is complete, start clicking the squares
     if (time.time() - start_time) > end_time:
-        for i in sequence.values():
-            squares[i].click()
+        # If specified game limit hasn't reached, click on the correct square else wrong one
+        if level_no < game_level_limit:
+            for i in sequence.values():
+                squares[i].click()
+        else:
+            squares[tuple(sequence.values())[1]].click()
 
         waiting = False
 

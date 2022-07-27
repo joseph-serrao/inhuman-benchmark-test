@@ -1,3 +1,4 @@
+from tracemalloc import start
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -25,8 +26,12 @@ start_button = WebDriverWait(driver, 10).until(
         (By.XPATH, "//button[@class='css-de05nr e19owgy710' and contains(text(), 'Start')]"))
 )
 
+start_button.click()
+
+game_level_limit = 42
+
 # Find the each number and click on it
-for i in range(4, 42):
+for i in range(4, game_level_limit):
     for j in range(1, i+1):
         driver.find_element(
             By.CSS_SELECTOR, f"div[data-cellnumber='{j}']").click()

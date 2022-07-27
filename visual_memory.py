@@ -36,7 +36,7 @@ grid_length = 3
 # Get the grid of squares from given length
 
 
-def getSquares(n):
+def get_squares(n):
     squares.clear()
     for i in range(1, n):
         for j in range(1, n):
@@ -45,7 +45,7 @@ def getSquares(n):
 
 
 # Initialize squares with the div elements
-getSquares(grid_length + 1)
+get_squares(grid_length + 1)
 
 # Dictionary is used to avoid duplication
 sequence = {}
@@ -55,13 +55,15 @@ level_no = 0
 count = 0
 
 start_time = float('inf')
-end_time = 1.5
+end_time = 1.8
 waiting = False
 
 grid_increased_count = 1
 level_to_increase = 3
 
-while level_no < 40:
+game_level_limit = 35
+
+while level_no < (game_level_limit + 1):
     level_no = int(level.text)
 
     # If level has increased
@@ -74,14 +76,17 @@ while level_no < 40:
         # Increase the size of the grid according to a quadratic series
         # The size of the grid increases at levels 3, 6, 9, 14, 19, 24, 31, 38, 45...
         if level_no == level_to_increase:
+            end_time += 0.175
             grid_length += 1
-            getSquares(grid_length + 1)
+            get_squares(grid_length + 1)
             grid_increased_count += 1
             level_to_increase = (
                 ((grid_increased_count ** 2) + (6 * grid_increased_count) + 2) // 3)
             # This formula finds the nth term of the above quadratic sries
 
-        count += 1
+        # Don't increment on the last level, since we get 3 lives
+        if level_no < game_level_limit:
+            count += 1
 
     # Get the class names of square elements while waiting
     if waiting:
@@ -89,9 +94,13 @@ while level_no < 40:
 
     # Find the animated squares from the class list
     for i in range(len(squares_class)):
-        if squares_class[i] == 'a':
-            sequence[str(i)] = i
-
+        # Get the correct or incorrect squares depending on whether the specified game limit has reached
+        if level_no < game_level_limit:
+            if squares_class[i] == 'a':
+                sequence[str(i)] = i
+        else:
+            if squares_class[i] != 'a':
+                sequence[str(i)] = i
     # If the wait time is complete, start clicking the squares
     if (time.time() - start_time) > end_time:
 

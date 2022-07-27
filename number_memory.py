@@ -27,8 +27,10 @@ start_button = WebDriverWait(driver, 10).until(
 
 start_button.click()
 
+game_level_limit = 20
+input = None
 
-for i in range(20):
+for i in range(game_level_limit - 1):
     number = driver.find_element(By.CSS_SELECTOR, ".big-number").text
 
     # Get the number and send it as input
@@ -42,3 +44,11 @@ for i in range(20):
     # Go to next level
     driver.find_element(By.CSS_SELECTOR, ".css-de05nr.e19owgy710").click()
     driver.find_element(By.CSS_SELECTOR, ".css-de05nr.e19owgy710").click()
+
+# Send wrong input to end the game
+input = WebDriverWait(driver, 300).until(
+    EC.presence_of_element_located(
+        (By.TAG_NAME, "input"))
+)
+input.send_keys("whatever")
+driver.find_element(By.CSS_SELECTOR, ".css-de05nr.e19owgy710").click()
