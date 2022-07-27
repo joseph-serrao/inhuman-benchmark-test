@@ -7,12 +7,7 @@ import chromedriver_autoinstaller
 from selenium.webdriver.chrome.options import Options
 
 
-def main():
-
-    # Opening the page
-    link = "https://humanbenchmark.com/tests/verbal-memory"
-    driver = webdriver.Chrome(options=chrome_options)
-    driver.get(link)
+def main(driver):
 
     # Explicit wait until the start button exists
     start_button = WebDriverWait(driver, 10).until(
@@ -22,7 +17,7 @@ def main():
 
     start_button.click()
 
-    word_element = driver.find_element(By.CLASS_NAME, "word").text
+    word_element = driver.find_element(By.CLASS_NAME, "word")
     words_list = []
 
     for i in range(300):
@@ -48,4 +43,10 @@ if __name__ == "__main__":
 
     chromedriver_autoinstaller.install()
 
-    main()
+    link = "https://humanbenchmark.com/tests/verbal-memory"
+
+    # Opening the page
+    driver = webdriver.Chrome(options=chrome_options)
+    driver.get(link)
+
+    main(driver)

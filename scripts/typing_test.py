@@ -8,12 +8,7 @@ import chromedriver_autoinstaller
 from selenium.webdriver.chrome.options import Options
 
 
-def main():
-
-    # Opening the page
-    link = 'https://humanbenchmark.com/tests/typing'
-    driver = webdriver.Chrome(options=chrome_options)
-    driver.get(link)
+def main(driver):
 
     char_element = None
     char_string = ''
@@ -52,4 +47,10 @@ if __name__ == "__main__":
 
     chromedriver_autoinstaller.install()
 
-    main()
+    link = 'https://humanbenchmark.com/tests/typing'
+
+    # Opening the page
+    driver = webdriver.Chrome(options=chrome_options)
+    driver.get(link)
+
+    main(driver)

@@ -8,12 +8,7 @@ import chromedriver_autoinstaller
 from selenium.webdriver.chrome.options import Options
 
 
-def main():
-
-    # Opening the page
-    link = 'https://humanbenchmark.com/tests/aim'
-    driver = webdriver.Chrome(options=chrome_options)
-    driver.get(link)
+def main(driver):
 
     # Explicit wait until the target button exists
     WebDriverWait(driver, 10).until(
@@ -37,4 +32,10 @@ if __name__ == "__main__":
 
     chromedriver_autoinstaller.install()
 
-    main()
+    link = 'https://humanbenchmark.com/tests/aim'
+
+    # Opening the page
+    driver = webdriver.Chrome(options=chrome_options)
+    driver.get(link)
+
+    main(driver)

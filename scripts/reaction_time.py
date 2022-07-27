@@ -8,12 +8,7 @@ import chromedriver_autoinstaller
 from selenium.webdriver.chrome.options import Options
 
 
-def main():
-
-    # Opening the page
-    link = 'https://humanbenchmark.com/tests/reactiontime'
-    driver = webdriver.Chrome(options=chrome_options)
-    driver.get(link)
+def main(driver):
 
     # Explicit wait until the start button exists
     div_element = WebDriverWait(driver, 10).until(
@@ -44,4 +39,10 @@ if __name__ == "__main__":
 
     chromedriver_autoinstaller.install()
 
-    main()
+    link = 'https://humanbenchmark.com/tests/reactiontime'
+
+    # Opening the page
+    driver = webdriver.Chrome(options=chrome_options)
+    driver.get(link)
+
+    main(driver)
