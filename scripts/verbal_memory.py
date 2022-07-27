@@ -20,20 +20,30 @@ def main(driver):
     word_element = driver.find_element(By.CLASS_NAME, "word")
     words_list = []
 
-    for i in range(300):
-        word = word_element.text
+    game_level_limit = 300
+
+    for i in range(game_level_limit):
 
         # I am not finding the seen and new button elements before the loop
         # because they have a chance to be clicked at the same time which returns an error
-        if word in words_list:
+        if word_element.text in words_list:
             seen_button = driver.find_element(
                 By.XPATH, "//button [contains( text(), 'SEEN')]")
             seen_button.click()
         else:
-            words_list.append(word)
+            words_list.append(word_element.text)
             new_button = driver.find_element(
                 By.XPATH, "//button [contains( text(), 'NEW')]")
             new_button.click()
+
+    # Send the wrong answer to end the game
+    for _ in range(3):
+        if word_element.text in words_list:
+            driver.find_element(
+                By.XPATH, "//button [contains( text(), 'NEW')]").click()
+        else:
+            driver.find_element(
+                By.XPATH, "//button [contains( text(), 'SEEN')]").click()
 
 
 if __name__ == "__main__":
