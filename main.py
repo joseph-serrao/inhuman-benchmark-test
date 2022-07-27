@@ -1,14 +1,9 @@
-from lib2to3.pgen2 import driver
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import time
 import chromedriver_autoinstaller
 from selenium.webdriver.chrome.options import Options
-from scripts import (aim_trainer, chimp_test, number_memory, reaction_time,
-                     sequence_memory, typing_test, verbal_memory, visual_memory)
+import importlib
+from scripts import __all__ as modules_list
 
 # Prevents the window from closing automaticallly after program is complete
 chrome_options = Options()
@@ -16,9 +11,17 @@ chrome_options.add_experimental_option("detach", True)
 
 chromedriver_autoinstaller.install()
 
-# Opening the page
-link = 'https://humanbenchmark.com/tests/aim'
 driver = webdriver.Chrome(options=chrome_options)
-driver.get(link)
 
-aim_trainer.main(driver)
+main_path = "https://humanbenchmark.com/tests/"
+pages = ["aim", "chimp", "number-memory", "reactiontime",
+         "sequence", "typing", "verbal-memory", "memory"]
+
+start = time.time()
+
+for page, module in zip(pages, modules_list):
+    driver.get(main_path + page)
+    importlib.import_module(module).main(driver)
+
+
+print(time.time() - start)
