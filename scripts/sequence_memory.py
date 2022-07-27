@@ -42,7 +42,7 @@ def main(driver):
 
     game_level_limit = 35
 
-    while level_no < (game_level_limit + 1):
+    while level_no <= game_level_limit:
         level_no = int(level.text)
 
         # If the level has increased, increment the time it takes to wait for all the squares' animation
@@ -71,6 +71,7 @@ def main(driver):
                     squares[i].click()
             else:
                 squares[tuple(sequence.values())[1]].click()
+                break
 
             waiting = False
 
