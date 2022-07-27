@@ -18,7 +18,7 @@ def main(driver):
 
     start_button.click()
 
-    game_level_limit = 42
+    game_level_limit = 30
 
     # Find the each number and click on it
     for i in range(4, game_level_limit):
@@ -28,6 +28,13 @@ def main(driver):
 
         # Click on next round button
         driver.find_element(By.CSS_SELECTOR, ".css-de05nr.e19owgy710").click()
+
+    for i in range(3):
+        driver.find_element(
+            By.CSS_SELECTOR, f"div[data-cellnumber='{j}']").click()
+        if i != 2:
+            driver.find_element(
+                By.CSS_SELECTOR, ".css-de05nr.e19owgy710").click()
 
 
 if __name__ == "__main__":
