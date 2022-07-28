@@ -12,7 +12,7 @@ BEST = {"chimp": 30, "number": 20,
         "sequence": 35, "verbal": 300, "visual": 35}
 
 # Contains values to skim through the tests quickly
-FAST = {"chimp": 15, "number": 5,
-        "sequence": 10, "verbal": 100, "visual": 10}
+FAST = {"chimp": 20, "number": 5,
+        "sequence": 7, "verbal": 150, "visual": 7}
 
-game_limit = BEST
+game_limit = FAST
