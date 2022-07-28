@@ -80,8 +80,11 @@ def main(driver):
 
         # Get the class names of square elements while waiting
         if waiting:
-            squares_class = [elem.get_attribute(
-                "class")[0] for elem in squares]
+            try:
+                squares_class = [elem.get_attribute(
+                    "class")[0] for elem in squares]
+            except:
+                break
 
         # Find the animated squares from the class list
         for i in range(len(squares_class)):
@@ -95,11 +98,8 @@ def main(driver):
         # If the wait time is complete, start clicking the squares
         if (time.time() - start_time) > end_time:
 
-            try:
-                for i in sequence.values():
-                    squares[i].click()
-            except:
-                break
+            for i in sequence.values():
+                squares[i].click()
 
             waiting = False
 
