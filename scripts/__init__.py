@@ -15,4 +15,4 @@ BEST = {"chimp": 42, "number": 20,
 FAST = {"chimp": 20, "number": 5,
         "sequence": 7, "verbal": 150, "visual": 7}
 
-game_limit = BEST
+game_limit = FAST
