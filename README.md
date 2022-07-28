@@ -34,4 +34,4 @@ You can manipulate the values of either constant and of any module to run the bo
 
 ### IV. Avoiding Errors
 
-To avoid any errors where the bot randomly stops running and to maximize its performance, it is best to run the program on it's own without minimizing the browser window or using any other applications that accesses the internet and consumes a lot of the speed (like video calling).
+To avoid any errors where the bot randomly stops running and to maximize its performance, it is best to run the program on it's own without minimizing the browser window or using any other applications in the background, especially ones that access the internet and consume a lot of the speed (like video calling).
