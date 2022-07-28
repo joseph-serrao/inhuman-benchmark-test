@@ -5,7 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import chromedriver_autoinstaller
 from selenium.webdriver.chrome.options import Options
-from __init__ import game_limit
+from scripts import game_limit
 
 
 def main(driver):
