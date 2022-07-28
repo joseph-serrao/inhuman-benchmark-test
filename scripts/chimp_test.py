@@ -27,14 +27,21 @@ def main(driver):
                 By.CSS_SELECTOR, f"div[data-cellnumber='{j}']").click()
 
         # Click on next round button
-        driver.find_element(By.CSS_SELECTOR, ".css-de05nr.e19owgy710").click()
-
-    for i in range(3):
-        driver.find_element(
-            By.CSS_SELECTOR, f"div[data-cellnumber='{j}']").click()
-        if i != 2:
+        try:
             driver.find_element(
                 By.CSS_SELECTOR, ".css-de05nr.e19owgy710").click()
+        except:
+            break
+
+    # Click on incorrect option to end the game
+    if game_level_limit < 42:
+        print("enter")
+        for i in range(3):
+            driver.find_element(
+                By.CSS_SELECTOR, f"div[data-cellnumber='{j}']").click()
+            if i != 2:
+                driver.find_element(
+                    By.CSS_SELECTOR, ".css-de05nr.e19owgy710").click()
 
     # click on save score button
     if __name__ != "__main__":

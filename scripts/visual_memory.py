@@ -99,7 +99,10 @@ def main(driver):
         if (time.time() - start_time) > end_time:
 
             for i in sequence.values():
-                squares[i].click()
+                try:
+                    squares[i].click()
+                except:
+                    break
 
             waiting = False
 
