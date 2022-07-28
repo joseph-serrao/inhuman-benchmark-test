@@ -8,11 +8,11 @@ __all__ = [
 # Store the maximum level limit for the time-consuming and endless tests
 
 # Contains values to get the best possible score in the database
-BEST = {"chimp_test": 30, "number_memory": 20,
-        "sequence_memory": 35, "verbal_memory": 300, "visual_memory": 35}
+BEST = {"chimp": 30, "number": 20,
+        "sequence": 35, "verbal": 300, "visual": 35}
 
 # Contains values to skim through the tests quickly
-FAST = {"chimp_test": 10, "number_memory": 5,
-        "sequence_memory": 10, "verbal_memory": 100, "visual_memory": 10}
+FAST = {"chimp": 15, "number": 5,
+        "sequence": 10, "verbal": 100, "visual": 10}
 
-game_level_limit = BEST
+game_limit = BEST
