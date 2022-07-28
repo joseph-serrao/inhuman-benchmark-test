@@ -26,7 +26,7 @@ Enter the following in a CLI to install neccessary modules:
 
 Inside the `__init__.py` file located under the `scripts/` folder, you will find two dictionary constants called `FAST` and `BEST`. Their dictionary values contain the level where you want to a particular test to end at. These limits exist for the endless/time-consuming tests.
 
-- `FAST` the is default setting to run the all of the tests for a quick demo (this takes around 2 minutes).
+- `FAST` the is default setting to run all of the tests for a quick demo (this takes around 2 minutes).
 
 - `BEST` is the setting to get the best possible score across the entire database of the website (Running `main.py` with this setting isn't recommended, as it takes a very long time).
 
