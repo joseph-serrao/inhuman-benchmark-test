@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import chromedriver_autoinstaller
 from selenium.webdriver.chrome.options import Options
+from __init__ import game_limit
 
 
 def main(driver):
@@ -40,7 +41,7 @@ def main(driver):
     end_time = 0.3
     waiting = False
 
-    game_level_limit = 35
+    game_level_limit = game_limit["sequence"]
 
     while level_no <= game_level_limit:
         level_no = int(level.text)

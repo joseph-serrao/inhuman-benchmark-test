@@ -5,6 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import chromedriver_autoinstaller
 from selenium.webdriver.chrome.options import Options
+from __init__ import game_limit
 
 
 def main(driver):
@@ -20,7 +21,7 @@ def main(driver):
     word_element = driver.find_element(By.CLASS_NAME, "word")
     words_list = []
 
-    game_level_limit = 300
+    game_level_limit = game_limit["verbal"]
 
     for i in range(game_level_limit):
 

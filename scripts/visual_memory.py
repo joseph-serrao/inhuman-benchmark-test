@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import chromedriver_autoinstaller
 from selenium.webdriver.chrome.options import Options
+from __init__ import game_limit
 
 
 def main(driver):
@@ -50,7 +51,7 @@ def main(driver):
     grid_increased_count = 1
     level_to_increase = 3
 
-    game_level_limit = 35
+    game_level_limit = game_limit["visual"]
 
     while level_no < (game_level_limit + 1):
         level_no = int(level.text)

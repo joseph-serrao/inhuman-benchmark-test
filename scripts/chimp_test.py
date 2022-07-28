@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import chromedriver_autoinstaller
 from selenium.webdriver.chrome.options import Options
+from __init__ import game_limit
 
 
 def main(driver):
@@ -18,7 +19,7 @@ def main(driver):
 
     start_button.click()
 
-    game_level_limit = 30
+    game_level_limit = game_limit["chimp"]
 
     # Find the each number and click on it
     for i in range(4, game_level_limit):
