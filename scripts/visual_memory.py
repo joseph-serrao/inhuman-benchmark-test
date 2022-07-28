@@ -114,6 +114,8 @@ def main(driver):
 
 
 if __name__ == "__main__":
+    from __init__ import game_limit
+
     # Prevents the window from closing automaticallly after program is complete
     chrome_options = Options()
     chrome_options.add_experimental_option("detach", True)
@@ -127,3 +129,5 @@ if __name__ == "__main__":
     driver.get(link)
 
     main(driver)
+else:
+    from scripts import game_limit

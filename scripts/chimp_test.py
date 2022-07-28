@@ -6,7 +6,6 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import chromedriver_autoinstaller
 from selenium.webdriver.chrome.options import Options
-from scripts import game_limit
 
 
 def main(driver):
@@ -44,6 +43,8 @@ def main(driver):
 
 
 if __name__ == "__main__":
+    from __init__ import game_limit
+
     # Prevents the window from closing automaticallly after program is complete
     chrome_options = Options()
     chrome_options.add_experimental_option("detach", True)
@@ -57,3 +58,5 @@ if __name__ == "__main__":
     driver.get(link)
 
     main(driver)
+else:
+    from scripts import game_limit
