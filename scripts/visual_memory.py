@@ -106,6 +106,11 @@ def main(driver):
 
             sequence.clear()
 
+    # click on save score button
+    if __name__ != "__main__":
+        driver.find_element(
+            By.CSS_SELECTOR, ".css-qm6rs9.e19owgy710").click()
+
 
 if __name__ == "__main__":
     # Prevents the window from closing automaticallly after program is complete
