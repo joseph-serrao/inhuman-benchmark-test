@@ -35,7 +35,6 @@ def main(driver):
 
     # Click on incorrect option to end the game
     if game_level_limit < 42:
-        print("enter")
         for i in range(3):
             driver.find_element(
                 By.CSS_SELECTOR, f"div[data-cellnumber='{j}']").click()
